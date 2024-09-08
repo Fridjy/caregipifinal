@@ -1,0 +1,20 @@
+<odoo noupdate="1">
+    <record id="asset_type_ponds" model="asset.type">
+       <field name="name">Ponds</field>
+    </record>
+    <record id="asset_type_cages" model="asset.type">
+       <field name="name">Cages</field>
+    </record>
+    <record id="asset_type_tanks" model="asset.type">
+       <field name="name">Tanks</field>
+    </record>
+    <record id="asset_type_race_ways" model="asset.type">
+       <field name="name">Race ways</field>
+    </record>
+    <record id="asset_type_recirculating" model="asset.type">
+       <field name="name">Recirculating Aquaculture Systems (RAS)</field>
+    </record>
+    <record id="asset_type_aquaponics" model="asset.type">
+       <field name="name">Aquaponics</field>
+    </record>
+</odoo>

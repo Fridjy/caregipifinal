@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenSPP. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="batch_create_wizard_form_view" model="ir.ui.view">
+        <field name="name">batch_create_wizard_form_view</field>
+        <field name="model">spp.batch.create.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="step1,step2" />
+                </header>
+                <sheet>
+                    <!-- STEP 1 -->
+                    <div
+                        class="alert alert-info text-center o_form_header"
+                        role="status"
+                        invisible="state == 'step2'"
+                    >
+                        Found multiple templates, please select a template below for this batch.
+                    </div>
+                    <group invisible="state == 'step2'">
+                        <field
+                            name="id_type"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
+                        <field
+                            name="idpass_id"
+                            options="{'no_create_edit':True,'no_open':True,'no_create':True}"
+                        />
+                    </group>
+                    <!-- STEP 2 -->
+                    <div class="oe_title" invisible="state == 'step1'">
+                        <h1>
+                            <label for="name" string="Batch Name" />
+                        </h1>
+                        <h1>
+                            <field name="name" required="1" />
+                        </h1>
+                        <div class="o_row">
+                        </div>
+                    </div>
+                    <group invisible="state == 'step1'">
+                        <field name="queue_ids" string="ID Request" readonly="1">
+                            <tree readonly="1">
+                                <field name="registrant_id" />
+                                <field name="id_type" string="ID Type" />
+                                <field name="idpass_id" string="Template" />
+                                <field name="date_requested" />
+                            </tree>
+                        </field>
+                    </group>
+                    <group invisible="state == 'step1'">
+                        <field name="id_count" readonly="1" />
+                        <field name="max_id_per_batch" />
+                        <field name="batches_count" />
+                    </group>
+                </sheet>
+                    <button
+                    name="next_step"
+                    string="Next Step"
+                    type="object"
+                    class="oe_highlight"
+                    invisible="state == 'step2'"
+                />
+                    <button
+                    name="create_batch"
+                    string="Create Batch"
+                    type="object"
+                    class="oe_highlight"
+                    invisible="state == 'step1'"
+                />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+            </form>
+        </field>
+    </record>
+
+</odoo>

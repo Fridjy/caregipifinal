@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="default_consent_config" model="spp.consent.config">
+        <field name="name">Default</field>
+    </record>
+</odoo>

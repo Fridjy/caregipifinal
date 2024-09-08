@@ -1,0 +1,61 @@
+<odoo>
+    <record id="view_spp_idpass_tree" model="ir.ui.view">
+        <field name="name">view_spp_idpass_tree</field>
+        <field name="model">spp.id.pass</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="name" />
+                <field name="api_url" />
+                <field name="api_username" />
+                <field name="api_password" />
+                <field name="auth_token_url" />
+                <field name="auth_token" />
+                <field name="filename_prefix" />
+                <field name="expiry_length" />
+                <field name="expiry_length_type" />
+                <field name="is_active" />
+                <button
+                    name="generate_auth_token"
+                    type="object"
+                    title="Generate Auth Token"
+                    icon="fa-key"
+                    class="btn-success"
+                    groups="g2p_registry_base.group_g2p_admin,spp_idqueue.group_g2p_id_validator"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_spp_idpass" model="ir.actions.act_window">
+        <field name="name">ID PASS Configuration</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">spp.id.pass</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new ID PASS Configuration!
+            </p><p>
+                Click the create button to enter the configuration of the IP PASS.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_spp_idpass_tree_view" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_spp_idpass_tree" />
+        <field name="act_window_id" ref="action_spp_idpass" />
+    </record>
+
+    <!-- <menuitem
+        id="menu_spp_idpass"
+        name="ID PASS"
+        action="action_spp_idpass"
+        parent="spp_idpass.id_pass_configuration_menu_root"
+        sequence="10"
+        groups="g2p_registry_base.group_g2p_admin"
+    /> -->
+</odoo>
