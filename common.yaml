@@ -1,0 +1,51 @@
+version: "2.4"
+
+services:
+  odoo:
+    platform: linux/amd64
+    build:
+      context: ./odoo
+      args:
+        DB_VERSION: "15"
+        ODOO_VERSION: "17.0"
+        UID: "${UID:-1000}"
+        GID: "${GID:-1000}"
+    environment:
+      EMAIL_FROM: "contact@openspp.org"
+      PGDATABASE: &dbname prod
+      PGUSER: &dbuser "odoo"
+      PROXY_MODE: "false"
+      LIST_DB: "true"
+    tty: true
+    volumes:
+      - filestore:/var/lib/odoo:z
+
+  db:
+    platform: linux/amd64
+    image: ghcr.io/openspp/postgis-autoconf:15-alpine
+    shm_size: 4gb
+    environment:
+      POSTGRES_DB: *dbname
+      POSTGRES_USER: *dbuser
+      CONF_EXTRA: |
+        work_mem = 512MB
+        max_connections = 200
+        shared_buffers = 1GB
+        effective_cache_size = 3GB
+        maintenance_work_mem = 256MB
+        checkpoint_completion_target = 0.9
+        wal_buffers = 16MB
+        default_statistics_target = 100
+        random_page_cost = 1.1
+        effective_io_concurrency = 200
+        work_mem = 2621kB
+        huge_pages = off
+        min_wal_size = 1GB
+        max_wal_size = 4GB
+
+    volumes:
+      - db:/var/lib/postgresql/data:z
+
+  smtpfake:
+    platform: linux/amd64
+    image: docker.io/mailhog/mailhog

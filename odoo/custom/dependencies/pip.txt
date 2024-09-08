@@ -1,0 +1,31 @@
+git+https://github.com/OCA/openupgradelib.git@master
+unicodecsv
+unidecode
+twilio==7.9.2
+boto3==1.24.2
+celery
+flower
+faker
+python-jose==3.3.0
+
+# REST API dependencies
+cachetools
+pydantic
+apispec>=4.0.0
+cerberus
+extendable
+extendable-pydantic
+jsondiff
+marshmallow
+marshmallow-objects>=2.0.0
+parse-accept-language
+pydantic
+pyquerystring
+typing-extensions
+schwifty
+
+# Geo dependencies
+geojson
+shapely
+simplejson
+pyproj
